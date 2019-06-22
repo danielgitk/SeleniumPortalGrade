@@ -1,3 +1,7 @@
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -5,7 +9,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
-import javax.swing.text.Document;
+//import javax.swing.text.Document;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.util.List;
@@ -56,6 +60,7 @@ public class portalLogin {
             break;
         }
         document.close();
+        driver.close();
     }
 // Go back to Home Page
         //   driver.navigate().back();
@@ -66,5 +71,5 @@ public class portalLogin {
 // Refresh browser
         //    driver.navigate().refresh();
 // Close browser
-        //   driver.close();
-    }}
+
+    }
