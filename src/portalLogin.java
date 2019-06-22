@@ -1,8 +1,14 @@
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+
+import javax.swing.text.Document;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.util.List;
 
 public class portalLogin {
     public static void main(String[] args) throws InterruptedException {
@@ -19,6 +25,38 @@ public class portalLogin {
         Thread.sleep(9);
         driver.findElement(By.id("Password")).sendKeys(Keys.ENTER);
 
+        driver.navigate().to("https://portal.aait.edu.et/Grade/GradeReport");
+        Thread.sleep(1000);
+
+        Document document = new Document();
+        try {
+            PdfWriter.getInstance(document, new FileOutputStream("Grade Report.pdf"));
+        } catch (DocumentException e) {
+            e.printStackTrace();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        document.addTitle("Grade Report ");
+
+        document.open();
+        Paragraph paragraph=new Paragraph();
+        List<WebElement> rows = driver.findElements(By.xpath("//table[@class='table table-bordered table-striped table-hover']//tr"));
+// for every line, store both columns
+        for (WebElement row : rows) {
+            WebElement key = row.findElement(By.xpath("/html/body/div[2]/div/div[2]/div[1]/div/div/table/tbody[1]"));
+            System.out.println(key.getText());
+            paragraph.add(key.getText());
+            try {
+                document.add(paragraph);
+            } catch (DocumentException e) {
+                e.printStackTrace();
+            }
+
+            break;
+        }
+        document.close();
+    }
 // Go back to Home Page
         //   driver.navigate().back();
 // Go forward to Registration page
