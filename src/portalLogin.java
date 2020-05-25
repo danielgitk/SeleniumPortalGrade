@@ -24,8 +24,8 @@ public class portalLogin {
         String appUrl = "https://portal.aait.edu.et";
         driver.get(appUrl);
 // Click on Registration link
-        driver.findElement(By.id("UserName")).sendKeys("ATR/8104/09");
-        driver.findElement(By.id("Password")).sendKeys("9629");
+        driver.findElement(By.id("UserName")).sendKeys("");
+        driver.findElement(By.id("Password")).sendKeys("");
         Thread.sleep(9);
         driver.findElement(By.id("Password")).sendKeys(Keys.ENTER);
 
